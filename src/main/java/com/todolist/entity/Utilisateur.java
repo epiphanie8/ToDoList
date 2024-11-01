@@ -1,6 +1,7 @@
 package com.todolist.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,6 +26,6 @@ public class Utilisateur {
 	private String password;
 	
 	@OneToMany(mappedBy = "utilisateur", orphanRemoval = true, cascade = CascadeType.ALL)
-	private ArrayList<Tache> tache;
+	private List<Tache> tache = new ArrayList<>();
 
 }

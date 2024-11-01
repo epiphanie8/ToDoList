@@ -1,6 +1,7 @@
 package com.todolist.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -22,5 +23,5 @@ public class Categorie {
 	private String libelle_cat;
 	
 	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, orphanRemoval = true)
-	private ArrayList<Tache> tache;
+	private List<Tache> tache = new ArrayList<>();
 }

@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  local-db-todolist:
+    image: mysql:8.0
+    container_name: local-db-todolist
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: local-db-todolist
+    networks:
+      - app-network
+
+  prod-db-todolist:
+    image: mysql:8.0
+    container_name: prod-db-todolist
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: prod-db-todolist
+    networks:
+      - app-network
+
+  ihm-db-todolist:
+    image: phpmyadmin
+    container_name: ihm-db-todolist
+    ports:
+      - "8083:80"
+    environment:
+      PMA_ARBITRARY: 1  # Permet de choisir la base de données à la connexion
+    networks:
+      - app-network
+    depends_on:
+      - local-db-todolist
+      - prod-db-todolist
+
+networks:
+  app-network:
+    driver: bridge
